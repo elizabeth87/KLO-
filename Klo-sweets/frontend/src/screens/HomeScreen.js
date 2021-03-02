@@ -1,17 +1,17 @@
-
+import axios from 'axios'
 const HomeScreen = {
     render: async () => {
-        const { products } = data;
-        const response = await fetch("http://localhost:5000/api/products", {
+        const response = await axios ({
+            url: 'http://localhost:5000/api/products', 
             headers: {
                 'Content-Type': 'application/json',
             },
         });
-        if(!response || !response.ok) {
+        if(!response || !response.statusText !=='OK' ) {
             return `<div>Error in getting data</div>`
         }
-        const products = await response.json()
-        return `
+        const products = response.data;
+        return ` 
         <ul class="products">
             ${products.map(
                 (product) => `
@@ -21,7 +21,7 @@ const HomeScreen = {
                         <img src="${product.image}" alt="${product.name}" />
                     </a>
                     <div class="product-name">
-                        <a href="/#/product/1" class="">
+                        <a href="/#/product/1">
                             ${product.name}
                         </a>
                     </div>
@@ -34,9 +34,11 @@ const HomeScreen = {
                 </div>
             </li>
             `
-            )}
-            `
-    }
-}
+            )
+            .join('\n')
+        }
+            `;
+    },
+};
 
 export default HomeScreen

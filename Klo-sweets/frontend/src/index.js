@@ -1,5 +1,5 @@
 import ProductScreen from './screens/ProductScreen.js'
-import HomeScreen from './screens/HomeScreen'
+import HomeScreen from './screens/HomeScreen.js'
 import { parseRequestUrl } from './utils.js';
 import Error404Screen from './screens/Error404Screen.js'
 
@@ -10,6 +10,7 @@ const routes = {
 
 const router = async () => {
     const request = parseRequestUrl()
+    console.log('request',request)
     const parseUrl =
     (request.resource ? `/${request.resource}`: '/') + 
     (request.id ? '/:id': "") + 
